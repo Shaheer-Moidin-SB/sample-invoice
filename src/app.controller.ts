@@ -1,6 +1,10 @@
 import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ClientKafka, EventPattern, RpcException } from '@nestjs/microservices';
+import {
+  ClientKafka,
+  MessagePattern,
+  RpcException,
+} from '@nestjs/microservices';
 
 @Controller()
 export class AppController implements OnModuleInit {
@@ -15,10 +19,10 @@ export class AppController implements OnModuleInit {
     return this.appService.getHello();
   }
 
-  @EventPattern('order_created')
-  handleOrderCreated(data: any) {
+  @MessagePattern('order_created')
+  async handleOrderCreated(data: any) {
     try {
-      return this.appService.handleOrderCreated(data);
+      return await this.appService.handleOrderCreated(data);
     } catch (oError) {
       throw new RpcException('Error while creating order ');
     }
