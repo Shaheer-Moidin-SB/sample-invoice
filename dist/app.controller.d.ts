@@ -4,8 +4,9 @@ import { ClientKafka } from '@nestjs/microservices';
 export declare class AppController implements OnModuleInit {
     private readonly appService;
     private readonly authClient;
-    constructor(appService: AppService, authClient: ClientKafka);
+    private readonly sendInvoiceClient;
+    constructor(appService: AppService, authClient: ClientKafka, sendInvoiceClient: ClientKafka);
     getHello(): string;
-    handleOrderCreated(data: any): void;
+    handleOrderCreated(data: any): Promise<string>;
     onModuleInit(): void;
 }

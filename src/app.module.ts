@@ -19,6 +19,19 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           },
         },
       },
+      {
+        name: 'SEND_INVOICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'send',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'send-consumer',
+          },
+        },
+      },
     ]),
   ],
   controllers: [AppController],

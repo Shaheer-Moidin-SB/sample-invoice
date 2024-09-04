@@ -17,9 +17,10 @@ const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
 const microservices_1 = require("@nestjs/microservices");
 let AppController = class AppController {
-    constructor(appService, authClient) {
+    constructor(appService, authClient, sendInvoiceClient) {
         this.appService = appService;
         this.authClient = authClient;
+        this.sendInvoiceClient = sendInvoiceClient;
     }
     getHello() {
         return this.appService.getHello();
@@ -34,6 +35,7 @@ let AppController = class AppController {
     }
     onModuleInit() {
         this.authClient.subscribeToResponseOf('get_user');
+        this.sendInvoiceClient.subscribeToResponseOf('send.invoice');
     }
 };
 exports.AppController = AppController;
@@ -52,7 +54,9 @@ __decorate([
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __param(1, (0, common_1.Inject)('AUTH_SERVICE')),
+    __param(2, (0, common_1.Inject)('SEND_INVOICE')),
     __metadata("design:paramtypes", [app_service_1.AppService,
+        microservices_1.ClientKafka,
         microservices_1.ClientKafka])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

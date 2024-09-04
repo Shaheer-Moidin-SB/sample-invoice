@@ -31,6 +31,19 @@ exports.AppModule = AppModule = __decorate([
                         },
                     },
                 },
+                {
+                    name: 'SEND_INVOICE',
+                    transport: microservices_1.Transport.KAFKA,
+                    options: {
+                        client: {
+                            clientId: 'send',
+                            brokers: ['localhost:9092'],
+                        },
+                        consumer: {
+                            groupId: 'send-consumer',
+                        },
+                    },
+                },
             ]),
         ],
         controllers: [app_controller_1.AppController],
