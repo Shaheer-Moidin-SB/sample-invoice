@@ -10,7 +10,7 @@ import {
 export class AppController implements OnModuleInit {
   constructor(
     private readonly appService: AppService,
-    @Inject('AUTH_SERVICE') private readonly authClient: ClientKafka,
+    // @Inject('AUTH_SERVICE') private readonly authClient: ClientKafka,
     @Inject('SEND_INVOICE') private readonly sendInvoiceClient: ClientKafka,
   ) {}
 
@@ -29,7 +29,7 @@ export class AppController implements OnModuleInit {
   }
 
   onModuleInit() {
-    this.authClient.subscribeToResponseOf('get_user');
+    // this.authClient.subscribeToResponseOf('get_user');
     this.sendInvoiceClient.subscribeToResponseOf('send.invoice');
   }
 }
